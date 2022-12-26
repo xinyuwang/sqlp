@@ -5,7 +5,8 @@ type sqlPack struct {
 	sqlstr  string
 }
 
-type Package interface {
+type SqlPack interface {
+	Sql() (string, []interface{})
 	SqlArgs() []interface{}
 	SqlStr() string
 }
@@ -18,7 +19,11 @@ func (s *sqlPack) SqlStr() string {
 	return s.sqlstr
 }
 
-func Pack(str string, args []interface{}) Package {
+func (s *sqlPack) Sql() (string, []interface{}) {
+	return s.sqlstr, s.sqlargs
+}
+
+func pack(str string, args []interface{}) SqlPack {
 	return &sqlPack{
 		sqlstr:  str,
 		sqlargs: args,
