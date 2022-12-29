@@ -1,5 +1,0 @@
-package sqlp
-
-func main() {
-
-}

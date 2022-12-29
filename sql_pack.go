@@ -1,31 +1,26 @@
 package sqlp
 
 type sqlPack struct {
-	sqlargs []interface{}
-	sqlstr  string
+	sqlArgs []interface{}
+	sqlStr  string
 }
 
 type SqlPack interface {
-	Sql() (string, []interface{})
-	SqlArgs() []interface{}
+	SqlArgs() []any
 	SqlStr() string
 }
 
-func (s *sqlPack) SqlArgs() []interface{} {
-	return s.sqlargs
+func (s *sqlPack) SqlArgs() []any {
+	return s.sqlArgs
 }
 
 func (s *sqlPack) SqlStr() string {
-	return s.sqlstr
+	return s.sqlStr
 }
 
-func (s *sqlPack) Sql() (string, []interface{}) {
-	return s.sqlstr, s.sqlargs
-}
-
-func pack(str string, args []interface{}) SqlPack {
+func pack(str string, args []any) SqlPack {
 	return &sqlPack{
-		sqlstr:  str,
-		sqlargs: args,
+		sqlStr:  str,
+		sqlArgs: args,
 	}
 }
